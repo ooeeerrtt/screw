@@ -157,6 +157,10 @@ public class JdbcUtils implements Serializable {
             return DatabaseType.KINGBASE_ES;
         } else if (jdbcUrl.contains(":phoenix:")) {
             return DatabaseType.PHOENIX;
+        } else if (jdbcUrl.contains(":clickhouse:")) {
+            return DatabaseType.CLICKHOUSE;
+        } else if (jdbcUrl.contains(":hive2:")) {
+            return DatabaseType.HIVE;
         } else if (jdbcUrl.contains(":Cache:")) {
             return DatabaseType.CACHEDB;
         } else {

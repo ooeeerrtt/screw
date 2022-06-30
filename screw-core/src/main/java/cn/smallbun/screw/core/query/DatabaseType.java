@@ -18,10 +18,12 @@
 package cn.smallbun.screw.core.query;
 
 import cn.smallbun.screw.core.query.cachedb.CacheDbDataBaseQuery;
+import cn.smallbun.screw.core.query.clickhouse.ClickhouseDataBaseQuery;
 import cn.smallbun.screw.core.query.db2.Db2DataBaseQuery;
 import cn.smallbun.screw.core.query.dm.DmDataBaseQuery;
 import cn.smallbun.screw.core.query.h2.H2DataBaseQuery;
 import cn.smallbun.screw.core.query.highgo.HigHgoDataBaseQuery;
+import cn.smallbun.screw.core.query.hive.HiveDataBaseQuery;
 import cn.smallbun.screw.core.query.hsql.HsqlDataBaseQuery;
 import cn.smallbun.screw.core.query.mariadb.MariaDbDataBaseQuery;
 import cn.smallbun.screw.core.query.mysql.MySqlDataBaseQuery;
@@ -41,113 +43,125 @@ import java.io.Serializable;
  * Created by qinggang.zuo@gmail.com / 2689170096@qq.com on 2020/3/18 11:59
  */
 public enum DatabaseType implements Serializable {
-                                                  /**
-                                                   * MYSQL
-                                                   */
-                                                  MYSQL("mysql", "MySql数据库",
-                                                        MySqlDataBaseQuery.class),
+    /**
+     * MYSQL
+     */
+    MYSQL("mysql", "MySql数据库",
+            MySqlDataBaseQuery.class),
 
-                                                  /**
-                                                   * MARIA DB
-                                                   */
-                                                  MARIADB("mariadb", "MariaDB数据库",
-                                                          MariaDbDataBaseQuery.class),
+    /**
+     * MARIA DB
+     */
+    MARIADB("mariadb", "MariaDB数据库",
+            MariaDbDataBaseQuery.class),
 
-                                                  /**
-                                                   * ORACLE
-                                                   */
-                                                  ORACLE("oracle", "Oracle数据库",
-                                                         OracleDataBaseQuery.class),
+    /**
+     * ORACLE
+     */
+    ORACLE("oracle", "Oracle数据库",
+            OracleDataBaseQuery.class),
 
-                                                  /**
-                                                   * DB2
-                                                   */
-                                                  DB2("db2", "DB2数据库", Db2DataBaseQuery.class),
+    /**
+     * DB2
+     */
+    DB2("db2", "DB2数据库", Db2DataBaseQuery.class),
 
-                                                  /**
-                                                   * H2
-                                                   */
-                                                  H2("h2", "H2数据库", H2DataBaseQuery.class),
+    /**
+     * H2
+     */
+    H2("h2", "H2数据库", H2DataBaseQuery.class),
 
-                                                  /**
-                                                   * HSQL
-                                                   */
-                                                  HSQL("hsql", "HSQL数据库", HsqlDataBaseQuery.class),
+    /**
+     * HSQL
+     */
+    HSQL("hsql", "HSQL数据库", HsqlDataBaseQuery.class),
 
-                                                  /**
-                                                   * SQLITE
-                                                   */
-                                                  SQLITE("sqlite", "SQLite数据库",
-                                                         SqliteDataBaseQuery.class),
+    /**
+     * SQLITE
+     */
+    SQLITE("sqlite", "SQLite数据库",
+            SqliteDataBaseQuery.class),
 
-                                                  /**
-                                                   * POSTGRE
-                                                   */
-                                                  POSTGRE_SQL("PostgreSql", "Postgre数据库",
-                                                              PostgreSqlDataBaseQuery.class),
+    /**
+     * POSTGRE
+     */
+    POSTGRE_SQL("PostgreSql", "Postgre数据库",
+            PostgreSqlDataBaseQuery.class),
 
-                                                  /**
-                                                   * SQL SERVER 2005
-                                                   */
-                                                  SQL_SERVER2005("sqlServer2005",
-                                                                 "SQLServer2005数据库",
-                                                                 SqlServerDataBaseQuery.class),
+    /**
+     * SQL SERVER 2005
+     */
+    SQL_SERVER2005("sqlServer2005",
+            "SQLServer2005数据库",
+            SqlServerDataBaseQuery.class),
 
-                                                  /**
-                                                   * SQLSERVER
-                                                   */
-                                                  SQL_SERVER("sqlserver", "SQLServer数据库",
-                                                             SqlServerDataBaseQuery.class),
+    /**
+     * SQLSERVER
+     */
+    SQL_SERVER("sqlserver", "SQLServer数据库",
+            SqlServerDataBaseQuery.class),
 
-                                                  /**
-                                                   * DM
-                                                   */
-                                                  DM("dm", "达梦数据库", DmDataBaseQuery.class),
+    /**
+     * DM
+     */
+    DM("dm", "达梦数据库", DmDataBaseQuery.class),
 
-                                                  /**
-                                                   * HIGHGO
-                                                   */
-                                                  HIGHGO("highgo", "瀚高数据库",
-                                                         HigHgoDataBaseQuery.class),
+    /**
+     * HIGHGO
+     */
+    HIGHGO("highgo", "瀚高数据库",
+            HigHgoDataBaseQuery.class),
 
-                                                  /**
-                                                   * xugu
-                                                   */
-                                                  XU_GU("xugu", "虚谷数据库", OtherDataBaseQuery.class),
+    /**
+     * xugu
+     */
+    XU_GU("xugu", "虚谷数据库", OtherDataBaseQuery.class),
 
-                                                  /**
-                                                   * Kingbase
-                                                   */
-                                                  KINGBASE_ES("kingbasees", "人大金仓数据库",
-                                                              OtherDataBaseQuery.class),
+    /**
+     * Kingbase
+     */
+    KINGBASE_ES("kingbasees", "人大金仓数据库",
+            OtherDataBaseQuery.class),
 
-                                                  /**
-                                                   * Phoenix
-                                                   */
-                                                  PHOENIX("phoenix", "Phoenix HBase数据库",
-                                                          PhoenixDataBaseQuery.class),
+    /**
+     * Phoenix
+     */
+    PHOENIX("phoenix", "Phoenix HBase数据库",
+            PhoenixDataBaseQuery.class),
 
-                                                  /**
-                                                   * CacheDB
-                                                   */
-                                                  CACHEDB("cachedb", "Cache 数据库",
-                                                          CacheDbDataBaseQuery.class),
+    /**
+     * CacheDB
+     */
+    CACHEDB("cachedb", "Cache 数据库",
+            CacheDbDataBaseQuery.class),
 
-                                                  /**
-                                                   * UNKONWN DB
-                                                   */
-                                                  OTHER("other", "其他数据库", OtherDataBaseQuery.class);
+    /**
+     * CacheDB
+     */
+    CLICKHOUSE("clickhouse", "clickhouse 数据库",
+            ClickhouseDataBaseQuery.class),
+
+    /**
+     * CacheDB
+     */
+    HIVE("hive", "Hive 数据仓库",
+            HiveDataBaseQuery.class),
+
+    /**
+     * UNKONWN DB
+     */
+    OTHER("other", "其他数据库", OtherDataBaseQuery.class);
 
     /**
      * 数据库名称
      */
     @Getter
-    private final String                         name;
+    private final String name;
     /**
      * 描述
      */
     @Getter
-    private final String                         desc;
+    private final String desc;
     /**
      * 查询实现
      */
