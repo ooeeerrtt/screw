@@ -133,7 +133,7 @@ public class ClickhouseDataBaseQuery extends AbstractDatabaseQuery {
     }
 
     @Override
-    public List<ClickhousePrimaryKeyModel> getPrimaryKeys() {
+    public List<ClickhousePrimaryKeyModel> getPrimaryKeys() throws QueryException {
         return primaryKeys;
     }
 
