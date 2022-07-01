@@ -10,6 +10,7 @@ import cn.smallbun.screw.core.query.AbstractDatabaseQuery;
 import cn.smallbun.screw.core.query.clickhouse.model.ClickhouseColumnModel;
 import cn.smallbun.screw.core.query.clickhouse.model.ClickhouseDatabaseModel;
 import cn.smallbun.screw.core.query.clickhouse.model.ClickhousePrimaryKeyModel;
+import cn.smallbun.screw.core.query.clickhouse.model.ClickhouseTableModel;
 import cn.smallbun.screw.core.query.mysql.model.MySqlColumnModel;
 import cn.smallbun.screw.core.query.mysql.model.MySqlTableModel;
 import cn.smallbun.screw.core.util.Assert;
@@ -71,7 +72,7 @@ public class ClickhouseDataBaseQuery extends AbstractDatabaseQuery {
             resultSet = getMetaData().getTables(getCatalog(), getSchema(), PERCENT_SIGN,
                     new String[]{"TABLE"});
 
-            List<MySqlTableModel> models = Mapping.convertList(resultSet, MySqlTableModel.class);
+            List<ClickhouseTableModel> models = Mapping.convertList(resultSet, ClickhouseTableModel.class);
             // 由于clickhouse的metadata中没有表注释，因此通过系统表重新获取
             reSetTable(models);
             System.out.println(models);
@@ -137,13 +138,13 @@ public class ClickhouseDataBaseQuery extends AbstractDatabaseQuery {
         return primaryKeys;
     }
 
-    private void reSetTable(List<MySqlTableModel> models) throws SQLException {
-        String sql = "select comment from system.tables where database = ? and name = ?";
+    private void reSetTable(List<ClickhouseTableModel> models) throws SQLException {
+        String sql = "select comment as 'REMARKS' from system.tables where database = ? and name = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
         String databaseName = getDataBase().getDatabase();
 
-        for (MySqlTableModel model : models) {
+        for (ClickhouseTableModel model : models) {
             String tableName = model.getTableName();
             preparedStatement.setString(1, databaseName);
             preparedStatement.setString(2, tableName);
